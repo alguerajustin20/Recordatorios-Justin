@@ -123,3 +123,18 @@ button[type="submit"]:hover {
            margin-top: 10px;
        }
    }
+   .search-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.search-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#search-input {
+    width: 100%;
+    border: 2px solid #3faae7;
+    background: #f0f9ff;
+}

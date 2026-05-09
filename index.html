@@ -31,6 +31,14 @@
             
             <button type="submit">➕ Guardar Recordatorio</button>
         </form>
+        <div class="search-container">
+    <input 
+        type="text" 
+        id="search-input" 
+        placeholder="🔍 Buscar recordatorio..."
+        onkeyup="filterTasks()"
+    >
+</div>
 
         <!-- Contenedor donde se insertarán las tareas dinámicamente -->
         <ul id="task-list-container" class="task-list"></ul>
