@@ -90,3 +90,19 @@ function createTaskElement(task) {
 
     return li;
 }
+function filterTasks() {
+    const searchText = document.getElementById("search-input").value.toLowerCase();
+    const tasks = document.querySelectorAll(".task-item");
+
+    tasks.forEach(task => {
+        const title = task.querySelector("h3").textContent.toLowerCase();
+        const description = task.querySelector("p").textContent.toLowerCase();
+
+        // Si el texto está en el título o en la descripción, se muestra
+        if (title.includes(searchText) || description.includes(searchText)) {
+            task.style.display = "flex";
+        } else {
+            task.style.display = "none";
+        }
+    });
+}
