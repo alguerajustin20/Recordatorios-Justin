@@ -37,7 +37,7 @@ form {
 
 input, textarea {
     padding: 12px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid #cddcef;
     border-radius: 10px;
     font-size: 14px;
 }
@@ -58,7 +58,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background: #056964;
+    background: #045b57;
 }
 
 .task-list {
@@ -81,7 +81,7 @@ button[type="submit"]:hover {
 .task-content h3 {
     font-size: 16px;
     margin: 0 0 5px;
-    color: #030f23;
+    color: #051a3f;
 }
 
 .task-content p {
@@ -112,3 +112,14 @@ button[type="submit"]:hover {
     border-radius: 6px;
     cursor: pointer;
 }
+
+@media (max-width: 600px) {
+       .container {
+           width: 90%;
+           margin: 10px auto;
+       }
+       .add-btn {
+           width: 100%;
+           margin-top: 10px;
+       }
+   }
