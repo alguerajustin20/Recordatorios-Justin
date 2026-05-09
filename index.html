@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Administrador de Tareas</title>
+    <!-- Enlace al CSS -->
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <h2>Nuevo Recordatorio</h2>
+        
+        <form onsubmit="handleFormSubmit(event)">
+            <!-- El atributo 'name' es clave para que el JS tome los datos -->
+            <input 
+                required 
+                type="text" 
+                placeholder=" Agrega un nuevo recordatorio........" 
+                name="title"
+                autocomplete="off"
+            >
+            
+            <textarea 
+                placeholder="Descripción..." 
+                name="description" 
+                rows="3"
+            ></textarea>
+            
+            <button type="submit">Agregar nuevo Recordatorio</button>
+        </form>
+
+        <!-- Contenedor donde se insertarán las tareas dinámicamente -->
+        <ul id="task-list-container" class="task-list"></ul>
+    </div>
+
+    <!-- Enlace al JS al final para que cargue después del HTML -->
+    <script src="./index.js"></script>
+</body>
+
+</html>
