@@ -138,3 +138,14 @@ button[type="submit"]:hover {
     border: 2px solid #49abe3;
     background: #f0f9ffc1;
 }
+
+/* Clase para tareas terminadas */
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    background-color: #d1fae5 !important; /* Un verde clarito */
+}
+
+.task-content {
+    cursor: pointer; /* Para que parezca un botón al pasar el mouse */
+}

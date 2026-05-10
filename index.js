@@ -39,6 +39,9 @@ function createTaskElement(task) {
 
     const divTaskContent = document.createElement("div");
     divTaskContent.classList.add("task-content");
+    divTaskContent.onclick = () => {
+    divTaskContent.parentElement.classList.toggle("completed");
+};
 
     const h3Title = document.createElement("h3");
     h3Title.textContent = task.title;
