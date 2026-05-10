@@ -61,6 +61,12 @@ function createTaskElement(task) {
     deleteButton.textContent = "Eliminar";
     deleteButton.classList.add("delete-btn"); // Clase para tu CSS
     deleteButton.onclick = () => li.remove();
+    deleteButton.onclick = () => {
+    const confirmar = confirm("¿Estás seguro de que quieres eliminar este recordatorio?");
+    if (confirmar) {
+        li.remove();
+    }
+};
 
     // BOTÓN EDITAR (Arreglado tus errores de escritura)
     const editButton = document.createElement("button");
