@@ -1,21 +1,17 @@
+// 1. FUNCIÓN PRINCIPAL: GESTIONAR EL FORMULARIO
 function handleFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // Evita que la página se recargue
 
     const formData = new FormData(event.target);
     const task = Object.fromEntries(formData);
 
-    // VALIDACIONES (Manteniendo tus reglas)
-    if (task.title.trim() === "") {
-        alert("El título es obligatorio");
-        return;
-    }
-
-    if (task.title.length < 3) {
+    // VALIDACIONES
+    if (task.title.trim() === "" || task.title.length < 3) {
         alert("El título debe tener mínimo 3 caracteres");
         return;
     }
 
-    // Validación de duplicados (Requisito de la tarea)
+    // VALIDACIÓN DE DUPLICADOS
     const existingTasks = document.querySelectorAll(".task-content h3");
     for (let t of existingTasks) {
         if (t.textContent.toLowerCase() === task.title.trim().toLowerCase()) {
@@ -25,16 +21,17 @@ function handleFormSubmit(event) {
     }
 
     task.id = Date.now();
-
     const taskElement = createTaskElement(task);
     const ulContainer = document.getElementById("task-list-container");
 
-    if (!ulContainer) return;
-
-    ulContainer.appendChild(taskElement);
-    event.target.reset(); // Limpiar formulario
+    if (ulContainer) {
+        ulContainer.appendChild(taskElement); 
+        event.target.reset(); // Limpiar formulario
+        updateCounter();      // Actualizar contador después de agregar
+    }
 }
 
+// 2. FUNCIÓN PARA CREAR EL ELEMENTO EN LA LISTA
 function createTaskElement(task) {
     const li = document.createElement("li");
     li.classList.add("task-item");
@@ -52,30 +49,30 @@ function createTaskElement(task) {
     divTaskContent.appendChild(h3Title);
     divTaskContent.appendChild(pDescription);
 
-    // ACCIONES
     const divTaskAction = document.createElement("div");
     divTaskAction.classList.add("task-actions");
 
-    // BOTÓN ELIMINAR (Arreglado para que borre de verdad)
+    // BOTÓN ELIMINAR
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Eliminar";
-    deleteButton.classList.add("delete-btn"); // Clase para tu CSS
-    deleteButton.onclick = () => li.remove();
+    deleteButton.classList.add("delete-btn");
+    
     deleteButton.onclick = () => {
-    const confirmar = confirm("¿Estás seguro de que quieres eliminar este recordatorio?");
-    if (confirmar) {
-        li.remove();
-    }
-};
+        const confirmar = confirm("¿Estás seguro de que quieres eliminar este recordatorio?");
+        if (confirmar) {
+            li.remove();
+            updateCounter(); // Actualizar contador después de borrar
+        }
+    };
 
-    // BOTÓN EDITAR (Arreglado tus errores de escritura)
+    // BOTÓN EDITAR
     const editButton = document.createElement("button");
     editButton.textContent = "Editar";
     editButton.classList.add("edit-btn");
 
     editButton.addEventListener("click", () => {
         const newTitle = prompt("Editar título", h3Title.textContent);
-        if (newTitle === null) return; // Si cancela, no hace nada
+        if (newTitle === null) return; 
 
         if (newTitle.trim() === "" || newTitle.length < 3) {
             alert("Título no válido");
@@ -96,6 +93,8 @@ function createTaskElement(task) {
 
     return li;
 }
+
+// 3. FUNCIÓN DEL BUSCADOR
 function filterTasks() {
     const searchText = document.getElementById("search-input").value.toLowerCase();
     const tasks = document.querySelectorAll(".task-item");
@@ -104,7 +103,6 @@ function filterTasks() {
         const title = task.querySelector("h3").textContent.toLowerCase();
         const description = task.querySelector("p").textContent.toLowerCase();
 
-        // Si el texto está en el título o en la descripción, se muestra
         if (title.includes(searchText) || description.includes(searchText)) {
             task.style.display = "flex";
         } else {
@@ -112,3 +110,15 @@ function filterTasks() {
         }
     });
 }
+
+// 4. FUNCIÓN DEL CONTADOR
+function updateCounter() {
+    const total = document.querySelectorAll(".task-item").length;
+    const counter = document.getElementById("task-counter");
+    if (counter) {
+        counter.textContent = `Tienes ${total} recordatorio${total === 1 ? '' : 's'}`;
+    }
+}
+
+// Inicializar el contador al cargar la página
+updateCounter();
